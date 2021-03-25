@@ -221,7 +221,7 @@ private:
     int m_color;
 
     bool m_started = false;
-    bool m_static = true;
+    bool m_static = false;
     Actor* m_parent = nullptr;
     Sprite* m_sprite = nullptr;
 

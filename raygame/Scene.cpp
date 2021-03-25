@@ -30,7 +30,7 @@ bool Scene::removeActor(Actor* actor)
     if (actor == nullptr) return false;
     for (int i = 0; i < m_actors.size(); i++)
     {
-        if (m_actors[i] = actor) {
+        if (m_actors[i] == actor) {
             m_actors.erase(m_actors.begin() + i);
             return true;
         }
@@ -48,7 +48,7 @@ void Scene::checkCollision()
     for (int i = 0; i < m_actors.size(); i++)
     {
         //Skip this actor if it doesn't collide
-        if (!m_actors[i]->getStatic())
+        if (m_actors[i]->getStatic())
             continue;
         //Check this actor against each other actor
         for (int j = 0; j < m_actors.size(); j++)

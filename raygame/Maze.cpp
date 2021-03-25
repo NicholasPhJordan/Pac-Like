@@ -72,12 +72,12 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 	return tile;
 }
 
-void Maze::generate(TileKey grid[Maze::HEIGHT][Maze::WIDTH])
+void Maze::generate(TileKey map[Maze::HEIGHT][Maze::WIDTH])
 {
 	for (int y = 0; y < m_size.y; y++) {
 		for (int x = 0; x < m_size.x; x++) {
 			// Create the tile
-			Tile currentTile = createTile(x, y, grid[y][x]);
+			Tile currentTile = createTile(x, y, map[y][x]);
 			// Add node to graph
 			currentTile.node = new NodeGraph::Node();
 			currentTile.node->position = getPosition(currentTile);

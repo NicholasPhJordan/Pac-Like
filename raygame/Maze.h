@@ -79,7 +79,7 @@ private:
 	/// <summary>
 	/// Generate a new grid of Walls.
 	/// </summary>
-	void generate(TileKey grid[Maze::HEIGHT][Maze::WIDTH]);
+	void generate(TileKey map[Maze::HEIGHT][Maze::WIDTH]);
 
 private:
 	MathLibrary::Vector2 m_size = { WIDTH, HEIGHT };
