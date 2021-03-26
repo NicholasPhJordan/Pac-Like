@@ -1,3 +1,14 @@
+# AI
+
+This unfortunately isn't a game but more of an example of how AI can work. It's a little game of freeze tag between two AI as one evades and the other pursues when in range of each other. They will wander until then.
+
+The Code doesn't exit itself so exit when either both actors are red or if the never interact. 
+
+## Bugs
+
+The "player" and enemy don't wander yet due to lack of state machine 
+___
+
 # raygame - sample project
 
 This is a sample C++ project setup with [raylib][raylib] for Visual

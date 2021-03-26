@@ -6,13 +6,18 @@
 Pac::Pac(float x, float y, float maxSpeed)
 	: Agent(x, y, Maze::TILE_SIZE / 2.5f, maxSpeed, maxSpeed, (int)0xFFFF66FF)
 {
-	m_keyboardBehavior = new KeyboardBehavior(maxSpeed * 100);
-	addBehavior(m_keyboardBehavior);
+	/*m_wanderBehavior = new WanderBehavior(5, 5);
+	addBehavior(m_wanderBehavior);*/
+
+	m_evadeBehavior = new Evade();
+	addBehavior(m_evadeBehavior);
 }
 
 Pac::~Pac()
 {
-	delete m_keyboardBehavior;
+	//delete m_keyboardBehavior;
+	delete m_wanderBehavior;
+	delete m_evadeBehavior;
 }
 
 void Pac::draw()
@@ -35,4 +40,22 @@ void Pac::onCollision(Actor* other)
 
 		setVelocity({ 0, 0 });
 	}
+
+	if (Agent* ghost = dynamic_cast<Agent*>(other)) {
+		setColor((int)0xC14242FF);
+		setMaxSpeed(0);
+		setMaxForce(0);
+		setVelocity({ 0, 0 });
+	}
+}
+
+void Pac::setTarget(Actor* target)
+{
+	m_target = target;
+	m_evadeBehavior->setTarget(target);
+}
+
+Actor* Pac::getTarget()
+{
+	return m_target;
 }
