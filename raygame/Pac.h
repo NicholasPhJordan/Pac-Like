@@ -13,9 +13,12 @@ public:
 	Pac(float x, float y, float speed);
 	~Pac();
 
+	virtual void update(float deltaTime) override;
 	virtual void draw() override;
 
 	virtual void onCollision(Actor* other) override;
+
+	bool cheackTargetInSight();
 
 	/// <returns>The current target</returns>
 	Actor* getTarget();

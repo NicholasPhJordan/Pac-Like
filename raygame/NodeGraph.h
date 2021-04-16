@@ -21,6 +21,8 @@ namespace NodeGraph
 		Node* previous;
 
 		std::vector<Edge> connections;
+
+		bool visted;
 	};
 
 	/// <summary>
@@ -29,7 +31,7 @@ namespace NodeGraph
 	/// </summary>
 	/// <param name="start">The first node in the path</param>
 	/// <param name="end">The destination node</param>
-	/// <returns>A deque storing the found path</returns>
+	 //<returns>A deque storing the found path</returns>
 	std::deque<Node*> findPath(Node* start, Node* end);
 
 	/// <summary>

@@ -4,11 +4,116 @@
 std::deque<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* end)
 {
 	// Find a path from start to end (The current implementation is obviously insufficient)
-	std::deque<Node*> path;
-	path.push_back(start);
-	path.push_back(start);
-	path.push_back(end);
-	return path;
+
+	////if start or end are null return 
+	//if (!start || !end)
+	//	return path;
+
+	//Check if the start or the goal pointer is null
+	if (!start || !end)
+	{
+		//return an empty list
+		return;
+		//end if statement
+	}
+
+	start->visted = true;
+
+	//Create a node pointer that will act as an iterator for the graph
+	Node* currentNode;
+	//Create an open list
+	std::deque<Node*> open;
+
+	//Create a closed list
+	std::deque<Node*> close;
+
+	//Add start to the open list
+	open.push_front(start);
+
+	//Loop while the open list is not empty
+	while (!open.empty())
+	{
+		//Sort the items in the open list by the f score
+		for (int i = 0; i < open.size(); i++)
+		{
+			for (int j = open.size() - 1; j > i; j--)
+			{
+				if (open[j]->gScore < open[j - 1]->connections)
+				{
+					Node* newArr = open[j];
+					open[j] = open[j - 1];
+					open[j - 1] = newArr;
+				}
+			}
+		}
+
+		//Set the iterator to be the first item in the open list
+		currentNode = open[0];
+
+		//Check if the iterator is pointing to the goal node
+		if (currentNode == end)
+		{
+			//Return the new path found
+			return;
+
+			//end if statement
+		}
+
+		//Pop the first item off the open list
+		open.pop_front();
+		//Add the first item to the closed list
+		close.push_back(currentNode);
+
+		for (int i = 0; i < currentNode->edges.size(); i++)
+		{
+			//Create a node pointer to store the other end of the edge
+			Node* currentEdgeEnd = nullptr;
+
+			//Check if the iterator is on the second end of the node
+			if (currentNode == currentNode->edges[i]->connectedNode2)
+			{
+				//Set the edge end pointer to be the first end of the node
+				currentEdgeEnd = currentNode->edges[i]->connectedNode1;
+			}
+			//Otherwise if the iterator is on the first end of the node...
+			else if (currentNode == currentNode->edges[i]->connectedNode1)
+			{
+				//set the edge end pointer to be the second end of the node
+				currentEdgeEnd = currentNode->edges[i]->connectedNode2;
+				// end if statement
+			}
+
+			//Check if node at the end of the edge is in the closed list
+			for (int i = 0; i < close.size(); i++)
+				if (currentEdgeEnd == close[i])
+				{
+					//Create a float and set it to be the g score of the iterator plus the cost of the edge
+					//Create a float and set it to be the h score of the node at the end of the edge
+					//Create a float for the f score and set it to be the g score combined with the h score
+
+					//Check if the node at the end of the edge is in the open list
+
+						//Mark the node as visited by changing its color
+						//Set the nodes g score to be the g score calculated earlier
+						//Set the nodes h score to be the h score calculated earlier
+						//Set the nodes f score to be the f score calculated earlier
+						//Set the nodes previous to be the iterator
+						//Add the node to the open list
+
+					//Otherwise if the f score is less than the node at the end of the edge's f score...
+
+						//Mark the node as visited by changing its color
+						//Set its g score to be the g score calculated earlier
+						//Set the nodes h score to be the h score calculated earlier
+						//Set its f score to be the f score calculated earlier
+						//Set its previous to be the current node
+
+					//end if statement
+				}
+			//end loop
+		}
+		//end loop
+	}
 }
 
 void NodeGraph::drawGraph(Node* start)
