@@ -64,32 +64,21 @@ std::deque<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* end)
 		//Add the first item to the closed list
 		close.push_back(currentNode);
 
-		for (int i = 0; i < currentNode->edges.size(); i++)
+		for (int i = 0; i < currentNode->connections.size(); i++)
 		{
 			//Create a node pointer to store the other end of the edge
-			Node* currentEdgeEnd = nullptr;
-
-			//Check if the iterator is on the second end of the node
-			if (currentNode == currentNode->edges[i]->connectedNode2)
-			{
-				//Set the edge end pointer to be the first end of the node
-				currentEdgeEnd = currentNode->edges[i]->connectedNode1;
-			}
-			//Otherwise if the iterator is on the first end of the node...
-			else if (currentNode == currentNode->edges[i]->connectedNode1)
-			{
-				//set the edge end pointer to be the second end of the node
-				currentEdgeEnd = currentNode->edges[i]->connectedNode2;
-				// end if statement
-			}
+			Node* currentEdgeEnd = currentNode->connections[i].target;
 
 			//Check if node at the end of the edge is in the closed list
 			for (int i = 0; i < close.size(); i++)
 				if (currentEdgeEnd == close[i])
 				{
 					//Create a float and set it to be the g score of the iterator plus the cost of the edge
+					float gScorePlus = currentNode->gScore + currentEdgeEnd->connections[i].cost;
 					//Create a float and set it to be the h score of the node at the end of the edge
+					float hscore = ;
 					//Create a float for the f score and set it to be the g score combined with the h score
+					float fScore = hScore + gScorePlus;
 
 					//Check if the node at the end of the edge is in the open list
 

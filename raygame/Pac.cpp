@@ -21,11 +21,7 @@ Pac::~Pac()
 
 void Pac::update(float deltaTime)
 {
-	if (cheackTargetInSight)
-	{
-
-	}
-	else 
+	
 
 	Agent::update(deltaTime);
 }
