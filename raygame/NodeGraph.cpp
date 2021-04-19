@@ -4,10 +4,9 @@
 std::deque<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* end)
 {
 	// Find a path from start to end (The current implementation is obviously insufficient)
-
-	////if start or end are null return 
-	//if (!start || !end)
-	//	return path;
+	//if start or end are null return 
+	/*if (!start || !end)
+		return;*/
 
 	//Check if the start or the goal pointer is null
 	if (!start || !end)
@@ -76,7 +75,7 @@ std::deque<NodeGraph::Node*> NodeGraph::findPath(Node* start, Node* end)
 					//Create a float and set it to be the g score of the iterator plus the cost of the edge
 					float gScorePlus = currentNode->gScore + currentEdgeEnd->connections[i].cost;
 					//Create a float and set it to be the h score of the node at the end of the edge
-					float hscore = ;
+					float hScore = end->position - currentNode->position;
 					//Create a float for the f score and set it to be the g score combined with the h score
 					float fScore = hScore + gScorePlus;
 

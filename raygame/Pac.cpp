@@ -21,7 +21,19 @@ Pac::~Pac()
 
 void Pac::update(float deltaTime)
 {
-	
+	m_evadeBehavior->getEnabled();
+	m_wanderBehavior->getEnabled();
+
+	if (cheackTargetInSight())
+	{
+		m_wanderBehavior->setEnabled(false);
+		m_evadeBehavior->setEnabled(true);
+	}
+	else
+	{
+		m_wanderBehavior->setEnabled(true);
+		m_evadeBehavior->setEnabled(false);
+	}
 
 	Agent::update(deltaTime);
 }
@@ -63,13 +75,9 @@ bool Pac::cheackTargetInSight()
 
 	//find the direction vector that the represetns where the target is relative to the enemy
 	float targetPosition = (getTarget()->getWorldPosition() - getWorldPosition()).getMagnitude();
-	//find dot product of the enemy's forward and the direction vector 
 
-	//find the angle using the dot product
-
-	//check if that angle is greater than the enemy's viewing angle(any value you see fit is fine)
-
-	//return if the enemy saw the target
+	if (targetPosition <= 3.0f)
+		return true;
 
 	return false;
 }

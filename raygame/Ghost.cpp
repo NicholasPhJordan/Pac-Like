@@ -11,18 +11,36 @@ Ghost::Ghost(float x, float y, float maxSpeed, int color, Maze* maze)
 	m_pathfindBehavior->setColor(color);
 	addBehavior(m_pathfindBehavior);
 
+	m_seekBehavior = new SeekBehavior();
+	addBehavior(m_seekBehavior);
+
 	m_wanderBehavior = new WanderBehavior(2, 2);
 	addBehavior(m_wanderBehavior);
 }
 
 Ghost::~Ghost()
 {
+	delete m_seekBehavior;
 	delete m_pathfindBehavior;
 	delete m_wanderBehavior;
 }
 
 void Ghost::update(float deltaTime)
 {
+	m_seekBehavior->getEnabled();
+	m_wanderBehavior->getEnabled();
+
+	if (cheackTargetInSight())
+	{
+		m_wanderBehavior->setEnabled(false);
+		m_seekBehavior->setEnabled(true);
+	}
+	else
+	{
+		m_wanderBehavior->setEnabled(true);
+		m_seekBehavior->setEnabled(false);
+	}
+
 	Agent::update(deltaTime);
 }
 
@@ -47,6 +65,21 @@ void Ghost::onCollision(Actor* other)
 
 		setVelocity({ 0, 0 });
 	}
+}
+
+bool Ghost::cheackTargetInSight()
+{
+	//chack if target is null, if so return false
+	if (getTarget() == nullptr)
+		return false;
+
+	//find the direction vector that the represetns where the target is relative to the enemy
+	float targetPosition = (getTarget()->getWorldPosition() - getWorldPosition()).getMagnitude();
+
+	if (targetPosition <= 3.0f)
+		return true;
+
+	return false;
 }
 
 void Ghost::setTarget(Actor* target)

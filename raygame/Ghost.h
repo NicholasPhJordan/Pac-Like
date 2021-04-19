@@ -2,6 +2,7 @@
 #include "Agent.h"
 #include "SeekPathBehavior.h"
 #include "WanderBehavior.h"
+#include "SeekBehavior.h"
 
 class Maze;
 
@@ -21,6 +22,8 @@ public:
 
 	virtual void onCollision(Actor* other) override;
 
+	bool cheackTargetInSight();
+
 	/// <returns>The current target</returns>
 	Actor* getTarget();
 	/// <summary>
@@ -32,6 +35,7 @@ public:
 private:
 	SeekPathBehavior* m_pathfindBehavior;
 	WanderBehavior* m_wanderBehavior;
+	SeekBehavior* m_seekBehavior;
 	Maze* m_maze;
 
 	Actor* m_target = nullptr;

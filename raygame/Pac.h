@@ -18,7 +18,7 @@ public:
 
 	virtual void onCollision(Actor* other) override;
 
-	bool cheackTargetInSight();
+	virtual bool cheackTargetInSight();
 
 	/// <returns>The current target</returns>
 	Actor* getTarget();
